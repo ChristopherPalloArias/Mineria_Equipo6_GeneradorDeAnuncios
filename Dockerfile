@@ -1,5 +1,5 @@
 # Utiliza una imagen base de Python
-FROM python:3.9-slim
+FROM python:3.9-slim AS base
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
@@ -9,13 +9,13 @@ COPY requirements.txt ./
 COPY app.py ./
 COPY remove_background.py ./
 
-# Descargar los directorios necesarios desde Docker Hub
-RUN docker pull christopherpallo2000/grupo6anuncios:latest
+# Descargar archivos desde una imagen en Docker Hub
+FROM christopherpallo2000/grupo6anuncios:latest AS assets
 
-# Extraer archivos desde la imagen
-COPY --from=christopherpallo2000/grupo6anuncios:latest /app/ad-gen ./ad-gen
-COPY --from=christopherpallo2000/grupo6anuncios:latest /app/fonts ./fonts
-COPY --from=christopherpallo2000/grupo6anuncios:latest /app/textures ./textures
+# Copia los directorios necesarios desde la imagen descargada
+COPY --from=assets /app/ad-gen ./ad-gen
+COPY --from=assets /app/fonts ./fonts
+COPY --from=assets /app/textures ./textures
 
 # Instala las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
