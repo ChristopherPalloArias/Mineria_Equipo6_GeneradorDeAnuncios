@@ -9,10 +9,13 @@ COPY requirements.txt ./
 COPY app.py ./
 COPY remove_background.py ./
 
-# Copia los directorios necesarios en el contenedor
-COPY ad-gen ./ad-gen
-COPY fonts ./fonts
-COPY textures ./textures
+# Descargar los directorios necesarios desde Docker Hub
+RUN docker pull christopherpallo2000/grupo6anuncios:latest
+
+# Extraer archivos desde la imagen
+COPY --from=christopherpallo2000/grupo6anuncios:latest /app/ad-gen ./ad-gen
+COPY --from=christopherpallo2000/grupo6anuncios:latest /app/fonts ./fonts
+COPY --from=christopherpallo2000/grupo6anuncios:latest /app/textures ./textures
 
 # Instala las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
