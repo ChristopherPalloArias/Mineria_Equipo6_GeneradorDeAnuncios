@@ -1,0 +1,42 @@
+# Entornos virtuales
+envnew/
+venv/
+.venv/
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Archivos de configuración de editor
+.vscode/
+.idea/
+
+# Archivos de configuración de Streamlit
+.streamlit/
+
+# Archivos generados automáticamente
+*.log
+*.bak
+*.swp
+*.tmp
+
+# Archivos de modelos y pesos
+ad-gen/generator_architecture.json
+ad-gen/generator_final.weights.h5
+
+# Fuentes y texturas pesadas
+fonts/
+textures/
+
+# Archivos temporales
+*.temp
+*.tmp
+
+# Archivos de salida
+output/
+generated_ad.png
+
+# Dependencias
+*.lock
